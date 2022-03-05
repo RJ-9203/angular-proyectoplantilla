@@ -1,0 +1,15 @@
+<p>observer works! 123 </p>
+
+<input type="number" class="form-control" [(ngModel)]="numberOne" (ngModelChange)="change()">
+<br>
+<input type="number" class="form-control" [(ngModel)]="numberTwo" (ngModelChange)="change()">
+<p>
+    Suma: {{  totalOne }}
+</p>
+<p>
+    Multiplicación: {{  totalTwo }}
+</p>
+<br>
+<p>
+    {{ subject.observers.length }}
+</p>

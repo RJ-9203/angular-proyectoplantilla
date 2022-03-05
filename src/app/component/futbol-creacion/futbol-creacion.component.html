@@ -1,0 +1,151 @@
+<div class="content">
+  <div class="text-center mgt">
+    <h1>¡ARMA TU EQUIPO!</h1>
+    <div class="text-center mgt col-sm-5">
+      <form [formGroup]="form">
+        <div class="mb-3 row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">JUGADOR</label>
+          <div class="col-sm-5">
+            <input type="text" formControlName="nombre" class="form-control" placeholder="Ingrese el nombre del jugador"
+              required="required">
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1"
+              data-bs-toggle="dropdown" aria-expanded="false" formControlName="posicion" required="required">
+              {{ post }}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li *ngFor="let item of posiciones;">
+                <a (click)="getValue(item)" class="dropdown-item">{{ item.posicion }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">FDN</label>
+          <div class="col-sm-5">
+            <input type="date" formControlName="fdn" class="form-control" placeholder="Ingrese día/mes/año"
+              required="required">
+          </div>
+        </div>
+
+      </form>
+      <div class="col-md-12">
+        <div class="single-form form-group text-center">
+          <button type="submit" (click)="enviar()" class="btn btn-success">Registrar Jugador</button>
+        </div>
+        <div class="row-md-6">
+          <div class="mb-3">
+            <table class="table responsive">
+              <thead>
+                <tr class="mb-3 text-center">
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Posición</th>
+                  <th scope="col">Fecha de Nacimiento</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of listJugadores; let i = index">
+                  <td scope="row">
+                    <span *ngIf="!item.status">{{ item.nombre }}</span>
+                    <input *ngIf="item.status"  class="form-control"
+                      value="{{item.name}}">
+                  </td>
+                  <td>
+                    <span *ngIf="!item.status"> {{ item.posicion }}</span>
+                    <input *ngIf="item.status" class="form-control" value="{{item.posicion}}"
+                      >
+                  </td>
+                  <td>
+                    <span *ngIf="!item.status"> {{ item.fdn }}</span>
+                    <input *ngIf="item.status" class="form-control" value="{{item.fdn}}"
+                      >
+                  </td>
+                  <td>
+                    <button class="btn btn-danger btn-sm" (click)="delete(item._id)">Eliminar</button><br>
+                    <button class="btn btn-warning btn-sm" (click)="e1(item)">Equipo 1</button>
+                    <button class="btn btn-primary btn-sm" (click)="e2(item)">Equipo 2</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-left mgt col-sm-5">
+              <div class="row">
+                <label for="staticEmail" class="col-form-label">INGRESE PARA VER JUGADAS</label>
+                <form [formGroup]="form">
+                  <div class="mb-3 row">
+                    <label for="staticEmail" class="col-sm-5 col-form-label">Usuario</label>
+                    <div class="col-sm- 9">
+                      <input type="text" formControlName="user" class="form-control" placeholder="usuario">
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label for="inputPassword" class="col-sm-5 col-form-label">Contraseña</label>
+                    <div class="col-sm-8">
+                      <input type="password" formControlName="password" placeholder="contraseña" class="form-control">
+                    </div>
+                 </div>
+                 <div class="mb-3 row">
+                    <div class="col-sm-8">
+                        <button class="btn btn-primary">Login</button>
+                      </div>
+                 </div>
+                 </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <img src="assets/images/cancha.jpg" class="responsive" style="height: 700px;">
+      </div>
+      <div class="col-md-6">
+        <table class="table responsive">
+          <thead>
+            <tr class="mb-3 text-center">
+              <th scope="col">EQUIPO 1</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of equipo_1; let i = index">
+              <td scope="row">
+                <span >{{ item.nombre }}</span>
+                <input *ngIf="item.status" (click)="e1(item)" 
+                class="form-control" value="{{item.nombre}}">
+              </td>
+              <td>
+                <span > {{ item.posicion }}</span>
+                <input *ngIf="item.status" (click)="e1(item)" 
+                class="form-control" value="{{item.posicion}}">
+              </td><td><button class="btn btn-danger btn-sm" (click)="deleteE1(item._id)">Eliminar</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table responsive" style="margin-top: 300PX;">
+          <thead>
+            <tr class="mb-3 text-center">
+              <th scope="col">EQUIPO 2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of equipo_2; let i = index">
+              <td scope="row">
+                <span >{{ item.nombre }}</span>
+                <input *ngIf="item.status" (click)="e2(item)" 
+                class="form-control" value="{{item.nombre}}">
+              </td>
+              <td>
+                <span > {{ item.posicion }}</span>
+                <input *ngIf="item.status" (click)="e2(item)" 
+                class="form-control" value="{{item.posicion}}">
+              </td><td><button class="btn btn-danger btn-sm" (click)="deleteE2(item._id)">Eliminar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

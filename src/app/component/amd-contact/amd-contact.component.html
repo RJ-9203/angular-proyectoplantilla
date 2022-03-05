@@ -1,0 +1,49 @@
+<input type="search" (keyup)="search($event)" 
+class="form-control" placeholder="Buscar por nombre">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Email</th>
+        <th scope="col">Asunto</th>
+        <th scope="col">Mensaje</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of listContact; let i = index">
+        <td scope="row" >
+          <span  *ngIf="!item.status">{{ item.name }}</span> 
+          <input *ngIf="item.status" (keyup)="change(item,$event, i, 'name')" 
+          class="form-control" value="{{item.name}}">
+        </td>
+        <td>
+          <span *ngIf="!item.status"> {{ item.email }}</span>
+          <input *ngIf="item.status" class="form-control" value="{{item.email}}" 
+          (keyup)="change(item,$event, i, 'email')">
+        </td>
+        <td>
+          <span *ngIf="!item.status"> {{ item.subject }}</span>
+          <input *ngIf="item.status" class="form-control" value="{{item.subject}}" 
+          (keyup)="change(item,$event, i, 'subject')">
+        </td>
+        <td>
+            <p>
+              <span *ngIf="!item.status"> {{ item.message }}</span>
+              <textarea *ngIf="item.status" class="form-control" (keyup)="change(item,$event, i, 'message')"> {{item.message}}</textarea>
+            </p>
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="edit(item)">
+            <span *ngIf="!item.status">
+              {{ item.textAction }}
+            </span>
+            <span *ngIf="item.status">
+              {{ item.textAction }}
+            </span>
+          </button> 
+        </td>
+        <td><button *ngIf="item.status" class="btn btn-danger" (click)="reset(i)">Canclelar</button> </td>
+      </tr>
+    </tbody>
+  </table>
